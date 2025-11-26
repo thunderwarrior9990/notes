@@ -185,6 +185,87 @@ ai-pentest interactive example.com
 #   report  - Generate report
 ```
 
+## 🤖 AI Agent Personas
+
+The tool supports multiple AI agent personas, each specialized for different security testing scenarios. Inspired by the [CAI (Cybersecurity AI)](https://github.com/aliasrobotics/cai) framework.
+
+### Available Agents
+
+| Agent | Type | Description |
+|-------|------|-------------|
+| Red Team Expert | `red_team` | Offensive security specialist focused on penetration and privilege escalation |
+| Blue Team Defender | `blue_team` | Defensive specialist for system hardening and threat detection |
+| Bug Bounty Hunter | `bug_bounty` | Web app security specialist with structured methodology |
+| CTF Player | `ctf_player` | Boot2Root and CTF challenge specialist |
+| Network Pentester | `network_pentester` | Network infrastructure security testing |
+| Web Pentester | `web_pentester` | Comprehensive web application testing |
+| API Security Tester | `api_security` | REST, GraphQL, and microservices security |
+| Cloud Security Specialist | `cloud_security` | AWS, Azure, GCP, and container security |
+| Mobile Security Tester | `mobile_security` | Android and iOS application testing |
+| Exploit Developer | `exploit_developer` | Vulnerability research and exploit creation |
+| Reverse Engineer | `reverse_engineer` | Binary analysis and reverse engineering |
+| Malware Analyst | `malware_analyst` | Malware analysis and threat intelligence |
+| DFIR Analyst | `dfir` | Digital forensics and incident response |
+| OSINT Investigator | `osint` | Open source intelligence gathering |
+| Vulnerability Triage | `triage` | Vulnerability verification and false positive elimination |
+| Security Reporter | `reporting` | Professional report generation |
+
+### Using Agents
+
+```bash
+# List all available agents
+ai-pentest agents
+
+# Get details about a specific agent
+ai-pentest agents --info red_team
+
+# Run pentest with specific agent
+ai-pentest pentest example.com --agent bug_bounty
+
+# Run with red team agent for CTF
+ai-pentest pentest 10.10.10.1 --agent ctf_player
+
+# Use web pentester for web app assessment
+ai-pentest pentest https://example.com --agent web_pentester
+```
+
+### Agent Selection Guide
+
+| Scenario | Recommended Agent |
+|----------|-------------------|
+| Bug bounty hunting | `bug_bounty` |
+| CTF/Boot2Root challenges | `ctf_player` |
+| Internal network pentest | `network_pentester` |
+| Web application pentest | `web_pentester` |
+| API security assessment | `api_security` |
+| Cloud security audit | `cloud_security` |
+| Red team engagement | `red_team` |
+| Incident response | `dfir` |
+| Vulnerability validation | `triage` |
+
+### Python API with Agents
+
+```python
+from ai_pentest import run_pentest, AIBrain
+from ai_pentest.agents import get_agent, BUG_BOUNTY_AGENT
+
+# Run with agent
+result = await run_pentest(
+    target="example.com",
+    agent="bug_bounty"  # Specify agent by name
+)
+
+# Or use AI brain directly with agent
+brain = AIBrain(agent="red_team")
+decisions = await brain.decide_next_steps(attack_surface, "exploitation")
+
+# Get agent details
+agent = get_agent("web_pentester")
+print(f"Agent: {agent.name}")
+print(f"Capabilities: {agent.capabilities}")
+print(f"Recommended tools: {agent.recommended_tools}")
+```
+
 ## 📖 Command Reference
 
 ### Main Scan Command
