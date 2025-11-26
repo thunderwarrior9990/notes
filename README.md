@@ -277,6 +277,124 @@ The tool generates comprehensive reports including:
 4. **Methodology** - Testing approach documentation
 5. **Recommendations** - Prioritized remediation roadmap
 
+## 🔧 Integrated Security Tools
+
+The tool integrates with 50+ popular security tools across multiple categories:
+
+### Network & Reconnaissance
+| Tool | Binary | Description |
+|------|--------|-------------|
+| Nmap | `nmap` | Network exploration and security auditing |
+| Masscan | `masscan` | Fast port scanner |
+| Rustscan | `rustscan` | Modern port scanner with nmap integration |
+| Amass | `amass` | Attack surface mapping and asset discovery |
+| Subfinder | `subfinder` | Fast passive subdomain enumeration |
+| Nuclei | `nuclei` | Template-based vulnerability scanner |
+| Fierce | `fierce` | DNS reconnaissance |
+| DNSEnum | `dnsenum` | DNS enumeration |
+| AutoRecon | `autorecon` | Multi-threaded reconnaissance |
+| TheHarvester | `theHarvester` | OSINT gathering |
+| Responder | `responder` | LLMNR/NBT-NS/MDNS poisoner |
+| NetExec | `nxc` | Network execution tool |
+| Enum4linux | `enum4linux-ng` | Windows/Samba enumeration |
+
+### Web Application Security
+| Tool | Binary | Description |
+|------|--------|-------------|
+| Gobuster | `gobuster` | Directory/file brute forcing |
+| Feroxbuster | `feroxbuster` | Recursive content discovery |
+| Dirsearch | `dirsearch` | Web path discovery |
+| Ffuf | `ffuf` | Fast web fuzzer |
+| Dirb | `dirb` | Web content scanner |
+| Httpx | `httpx` | HTTP probing toolkit |
+| Katana | `katana` | Next-gen web crawler |
+| Nikto | `nikto` | Web server scanner |
+| SQLMap | `sqlmap` | SQL injection tool |
+| WPScan | `wpscan` | WordPress security scanner |
+| Arjun | `arjun` | HTTP parameter discovery |
+| ParamSpider | `paramspider` | Parameter extraction |
+| Dalfox | `dalfox` | XSS scanner |
+| Wafw00f | `wafw00f` | WAF detection |
+
+### Password & Authentication
+| Tool | Binary | Description |
+|------|--------|-------------|
+| Hydra | `hydra` | Network authentication cracker |
+| John | `john` | Password cracker |
+| Hashcat | `hashcat` | Advanced password recovery |
+| Medusa | `medusa` | Parallel authentication cracker |
+| Patator | `patator` | Multi-purpose brute-forcer |
+| CrackMapExec | `crackmapexec` | AD Swiss army knife |
+| Evil-WinRM | `evil-winrm` | WinRM shell |
+| Hash-Identifier | `hashid` | Hash type identification |
+
+### Binary Analysis & Reverse Engineering
+| Tool | Binary | Description |
+|------|--------|-------------|
+| GDB | `gdb` | GNU Debugger |
+| Radare2 | `r2` | Reverse engineering framework |
+| Binwalk | `binwalk` | Firmware analysis |
+| Checksec | `checksec` | Binary security checker |
+| Strings | `strings` | String extraction |
+| Objdump | `objdump` | Object file analyzer |
+| Volatility3 | `vol` | Memory forensics |
+| Foremost | `foremost` | File carving |
+| Steghide | `steghide` | Steganography tool |
+| Exiftool | `exiftool` | Metadata analyzer |
+
+### Cloud Security
+| Tool | Binary | Description |
+|------|--------|-------------|
+| Prowler | `prowler` | AWS/Azure/GCP security |
+| Scout Suite | `scout` | Multi-cloud security auditing |
+| Trivy | `trivy` | Container vulnerability scanner |
+| Kube-hunter | `kube-hunter` | Kubernetes penetration testing |
+| Kube-bench | `kube-bench` | CIS Kubernetes Benchmark |
+| Docker Bench | `docker-bench-security` | Docker CIS Benchmark |
+
+### Using Integrated Tools
+
+```bash
+# Check which tools are installed
+ai-pentest tools --check
+
+# Run a specific tool
+ai-pentest run-tool NmapScanner 192.168.1.1
+
+# Run reconnaissance tools
+ai-pentest recon example.com
+
+# Run vulnerability scanning
+ai-pentest vuln-scan https://example.com
+```
+
+### Tool Integration in Python
+
+```python
+from ai_pentest.tools import ToolManager, NmapScanner, NucleiScanner
+
+# Use the tool manager
+async def run_tools():
+    manager = ToolManager(use_ai=True)
+    
+    # Run reconnaissance
+    result = await manager.run_recon("example.com")
+    
+    # Run specific tools
+    nmap_result = await manager.run_tool("NmapScanner", "192.168.1.1")
+    nuclei_result = await manager.run_tool("NucleiScanner", "https://example.com")
+    
+    await manager.close()
+
+# Use tools directly
+async def direct_tool_usage():
+    nmap = NmapScanner()
+    result = await nmap.run("192.168.1.1", scan_type="comprehensive")
+    
+    for finding in result.findings:
+        print(f"[{finding['severity']}] {finding['title']}")
+```
+
 ## 🧪 Testing
 
 ```bash
