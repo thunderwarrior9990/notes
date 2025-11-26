@@ -193,6 +193,7 @@ The tool supports multiple AI agent personas, each specialized for different sec
 
 | Agent | Type | Description |
 |-------|------|-------------|
+| **Senior Security Consultant** | `senior_pentester` | **10+ years enterprise pentest experience, Fortune 500 expertise** |
 | Red Team Expert | `red_team` | Offensive security specialist focused on penetration and privilege escalation |
 | Blue Team Defender | `blue_team` | Defensive specialist for system hardening and threat detection |
 | Bug Bounty Hunter | `bug_bounty` | Web app security specialist with structured methodology |
@@ -209,6 +210,35 @@ The tool supports multiple AI agent personas, each specialized for different sec
 | OSINT Investigator | `osint` | Open source intelligence gathering |
 | Vulnerability Triage | `triage` | Vulnerability verification and false positive elimination |
 | Security Reporter | `reporting` | Professional report generation |
+
+### Senior Security Consultant Agent
+
+The `senior_pentester` agent represents a seasoned Security Consultant with over a decade of hands-on experience:
+
+**Expertise Areas:**
+- Enterprise penetration testing (Fortune 500 experience)
+- Red teaming and adversarial simulation
+- Threat modeling and risk assessment
+- Security architecture reviews
+- Cloud security (AWS, Azure, GCP)
+- Active Directory attacks and lateral movement
+
+**Methodology (PTES/OWASP/NIST aligned):**
+1. Scoping & Intelligence Gathering
+2. Vulnerability Identification
+3. Exploitation & Validation
+4. Post-Exploitation & Impact Assessment
+5. Reporting & Remediation Guidance
+
+**Communication Style:**
+- Translates complex findings for both technical and executive audiences
+- Risk prioritization based on business impact
+- Actionable remediation recommendations
+
+```bash
+# Use senior pentester for enterprise assessments
+ai-pentest pentest enterprise.com --agent senior_pentester
+```
 
 ### Using Agents
 
@@ -233,6 +263,7 @@ ai-pentest pentest https://example.com --agent web_pentester
 
 | Scenario | Recommended Agent |
 |----------|-------------------|
+| **Enterprise security assessment** | `senior_pentester` |
 | Bug bounty hunting | `bug_bounty` |
 | CTF/Boot2Root challenges | `ctf_player` |
 | Internal network pentest | `network_pentester` |
@@ -242,6 +273,7 @@ ai-pentest pentest https://example.com --agent web_pentester
 | Red team engagement | `red_team` |
 | Incident response | `dfir` |
 | Vulnerability validation | `triage` |
+| Executive-level reporting | `senior_pentester` |
 
 ### Python API with Agents
 
