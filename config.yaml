@@ -1,0 +1,88 @@
+# AI Pentest Tool Configuration
+# ================================
+
+# Cursor API Configuration
+cursor:
+  api_key: ${CURSOR_API_KEY}  # Set via environment variable
+  base_url: "https://api.cursor.com/v1"
+  model: "claude-3-5-sonnet-20241022"
+  max_tokens: 4096
+  temperature: 0.3
+
+# Alternative: Direct Anthropic API
+anthropic:
+  api_key: ${ANTHROPIC_API_KEY}
+  base_url: "https://api.anthropic.com/v1"
+  model: "claude-3-5-sonnet-20241022"
+  max_tokens: 4096
+
+# Scanning Configuration
+scanning:
+  # Network scanning
+  network:
+    timeout: 30
+    max_concurrent: 50
+    port_ranges:
+      quick: "21,22,23,25,53,80,110,143,443,445,993,995,3306,3389,5432,8080,8443"
+      common: "1-1024"
+      full: "1-65535"
+    
+  # Web scanning
+  web:
+    timeout: 30
+    max_concurrent: 20
+    user_agent: "AI-Pentest/1.0 (Security Assessment Tool)"
+    follow_redirects: true
+    max_redirects: 5
+    
+  # Subdomain enumeration
+  subdomain:
+    timeout: 10
+    max_concurrent: 100
+    wordlist: "default"
+    dns_resolvers:
+      - "8.8.8.8"
+      - "1.1.1.1"
+      - "9.9.9.9"
+
+  # SSL/TLS analysis
+  ssl:
+    timeout: 15
+    check_cert_chain: true
+    check_vulnerabilities: true
+
+# Report Configuration
+report:
+  output_dir: "./reports"
+  format: "html"  # html, pdf, markdown
+  include_evidence: true
+  include_recommendations: true
+  severity_colors:
+    critical: "#dc3545"
+    high: "#fd7e14"
+    medium: "#ffc107"
+    low: "#28a745"
+    info: "#17a2b8"
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  file: "ai_pentest.log"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Safety Settings
+safety:
+  # Rate limiting to avoid overwhelming targets
+  requests_per_second: 10
+  # Respect robots.txt
+  respect_robots_txt: true
+  # Maximum depth for crawling
+  max_crawl_depth: 3
+  # Timeout for individual requests
+  request_timeout: 30
+  # Don't scan these paths
+  excluded_paths:
+    - "/logout"
+    - "/signout"
+    - "/delete"
+    - "/remove"
