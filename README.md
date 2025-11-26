@@ -1,11 +1,18 @@
 # 🔒 AI Pentest Tool
 
-An AI-assisted penetration testing tool with Cursor API integration and comprehensive report generation. Similar to HexStrike AI, this tool leverages AI to enhance security assessments with intelligent analysis and recommendations.
+An AI-driven penetration testing tool with Cursor API integration and comprehensive report generation. Similar to HexStrike AI, this tool leverages AI to orchestrate security assessments, analyze tool outputs, and make intelligent decisions about next steps.
 
 ![Python Version](https://img.shields.io/badge/python-3.10+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 ## ✨ Features
+
+### 🧠 AI-Driven Penetration Testing Engine
+- **Autonomous Decision Making** - AI Brain analyzes tool outputs and decides next steps
+- **Full Methodology Coverage** - Reconnaissance → Enumeration → Vulnerability → Exploitation → Reporting
+- **Attack Surface Mapping** - Automatically tracks assets, services, vulnerabilities, and credentials
+- **Attack Planning** - AI generates prioritized attack paths with step-by-step guides
+- **50+ Tool Integration** - Seamless integration with popular security tools
 
 ### 🎯 Scanning Capabilities
 - **Network Reconnaissance** - DNS enumeration, port scanning, service detection, WHOIS lookup
@@ -15,6 +22,7 @@ An AI-assisted penetration testing tool with Cursor API integration and comprehe
 
 ### 🤖 AI-Powered Analysis
 - **Intelligent Vulnerability Analysis** - AI explains findings and suggests exploitation approaches
+- **Contextual Decision Making** - AI considers current attack surface when choosing tools
 - **Risk Assessment** - Automatic severity classification with context
 - **Remediation Guidance** - Detailed fix recommendations tailored to your environment
 - **Report Generation** - AI-enhanced executive summaries and technical documentation
@@ -23,6 +31,7 @@ An AI-assisted penetration testing tool with Cursor API integration and comprehe
 - **HTML Reports** - Beautiful, interactive reports with severity breakdowns
 - **PDF Export** - Print-ready professional documentation
 - **JSON Output** - Machine-readable data for integration
+- **Attack Surface Export** - Complete JSON export of discovered assets and vulnerabilities
 - **Executive Summaries** - AI-generated summaries for non-technical stakeholders
 
 ## 🚀 Quick Start
@@ -63,7 +72,10 @@ ANTHROPIC_API_KEY=your_api_key_here
 ### Basic Usage
 
 ```bash
-# Full security scan
+# 🚀 Run full AI-driven penetration test
+ai-pentest pentest example.com
+
+# Full security scan (classic mode)
 ai-pentest scan example.com
 
 # Web application scan only
@@ -80,6 +92,97 @@ ai-pentest ssl example.com
 
 # Generate PDF report
 ai-pentest scan example.com --format pdf
+```
+
+## 🧠 AI-Driven Pentest Engine
+
+The core feature is the AI-driven penetration testing engine that follows a complete methodology:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     AI Pentest Engine                           │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│  │  Recon   │→ │  Enum    │→ │  Vuln    │→ │ Exploit  │→ Report│
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
+│       │             │             │             │               │
+│       └─────────────┴──────┬──────┴─────────────┘               │
+│                            │                                    │
+│                     ┌──────▼──────┐                             │
+│                     │  AI Brain   │                             │
+│                     │  Analyzes   │                             │
+│                     │  & Decides  │                             │
+│                     └─────────────┘                             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### How It Works
+
+1. **Reconnaissance Phase**: Discovers assets, subdomains, services
+   - AI analyzes results and recommends additional discovery tools
+   
+2. **Enumeration Phase**: Deep dives into discovered services
+   - AI identifies interesting endpoints and suggests enumeration strategies
+
+3. **Vulnerability Phase**: Identifies security issues
+   - AI prioritizes findings and recommends validation approaches
+
+4. **Exploitation Phase**: Validates and exploits vulnerabilities
+   - AI generates attack plans with step-by-step guides
+
+5. **Reporting Phase**: Generates comprehensive reports
+   - AI writes executive summaries and recommendations
+
+### Pentest Command
+
+```bash
+# Run full AI-driven pentest
+ai-pentest pentest example.com
+
+# Specify phases to run
+ai-pentest pentest example.com --phases reconnaissance,enumeration,vulnerability
+
+# Custom output and settings
+ai-pentest pentest example.com \
+  --output ./results \
+  --max-iter 5 \
+  --scope "api.example.com,admin.example.com"
+
+# Manual mode (no auto decisions)
+ai-pentest pentest example.com --manual
+
+# Aggressive mode (faster, noisier)
+ai-pentest pentest example.com --aggressive
+```
+
+### Attack Planning
+
+```bash
+# Generate attack plan from existing attack surface
+ai-pentest attack-plan example.com --surface ./attack_surface.json
+
+# The plan includes:
+# - Prioritized attack paths
+# - Step-by-step exploitation guides
+# - Tool recommendations
+# - Risk assessments
+```
+
+### Interactive Mode
+
+```bash
+# Start interactive session
+ai-pentest interactive example.com
+
+# Available commands in interactive mode:
+#   status  - Show attack surface status
+#   tools   - List available tools
+#   run     - Run a specific tool
+#   analyze - Get AI recommendations
+#   vulns   - Show vulnerabilities
+#   assets  - Show discovered assets
+#   plan    - Generate attack plan
+#   report  - Generate report
 ```
 
 ## 📖 Command Reference
@@ -126,24 +229,119 @@ ai-pentest config --show
 
 ## 🔧 Python API
 
+### AI-Driven Pentest Engine
+
 ```python
 import asyncio
-from ai_pentest.orchestrator import run_pentest
-from ai_pentest.scanners import WebScanner, NetworkScanner
-from ai_pentest.ai import CursorAIClient
+from ai_pentest import PentestEngine, EngineConfig, run_pentest
 
-# Full penetration test
-async def main():
-    report_path = await run_pentest(
-        target="https://example.com",
-        use_ai=True,
-        report_format="html"
+# Simple one-liner pentest
+async def simple_pentest():
+    result = await run_pentest(
+        target="example.com",
+        output_dir="./pentest_results",
+        phases=["reconnaissance", "enumeration", "vulnerability", "reporting"],
+        ai_enabled=True,
+        auto_mode=True
     )
-    print(f"Report saved to: {report_path}")
+    
+    print(f"Findings: {result.total_findings}")
+    print(f"Vulnerabilities: {result.total_vulnerabilities}")
+    print(f"Critical: {result.critical_count}")
 
-asyncio.run(main())
+asyncio.run(simple_pentest())
 
-# Individual scanner usage
+# Full configuration control
+async def custom_pentest():
+    config = EngineConfig(
+        target="example.com",
+        scope=["api.example.com", "admin.example.com"],
+        output_dir="./pentest_results",
+        
+        # Phases
+        phases_to_run=["reconnaissance", "enumeration", "vulnerability", "exploitation", "reporting"],
+        
+        # AI settings
+        ai_enabled=True,
+        auto_mode=True,
+        max_iterations_per_phase=10,
+        
+        # Safety
+        safe_mode=True,
+        max_concurrent_tools=5
+    )
+    
+    engine = PentestEngine(config)
+    result = await engine.run()
+    
+    # Access detailed results
+    for phase_name, phase_result in result.phase_results.items():
+        print(f"{phase_name}: {phase_result.findings_count} findings")
+    
+    # Attack plan is auto-generated
+    if result.attack_plan:
+        print(f"Attack paths: {len(result.attack_plan.paths)}")
+
+asyncio.run(custom_pentest())
+```
+
+### AI Brain and Attack Planning
+
+```python
+from ai_pentest import AIBrain, AttackPlanner, AttackSurface
+from ai_pentest.engine.attack_surface import Asset, Vulnerability, AssetType, VulnSeverity
+
+async def custom_planning():
+    # Build attack surface
+    attack_surface = AttackSurface("example.com")
+    
+    # Add discovered assets
+    asset = Asset(
+        id="web-1",
+        name="www.example.com",
+        asset_type=AssetType.WEB_APPLICATION,
+        hostnames=["www.example.com"]
+    )
+    attack_surface.add_asset(asset)
+    
+    # Add vulnerability
+    vuln = Vulnerability(
+        id="VULN-001",
+        title="SQL Injection",
+        severity=VulnSeverity.CRITICAL,
+        exploitable=True
+    )
+    attack_surface.add_vulnerability(vuln)
+    
+    # Get AI recommendations
+    brain = AIBrain()
+    await brain.initialize()
+    
+    decisions = await brain.decide_next_steps(
+        attack_surface=attack_surface,
+        current_phase="vulnerability"
+    )
+    
+    for d in decisions:
+        print(f"[{d.priority}] {d.tool}: {d.reasoning}")
+    
+    # Generate attack plan
+    planner = AttackPlanner(brain)
+    plan = await planner.generate_plan(attack_surface)
+    
+    print(f"Recommended path: {plan.recommended_path}")
+    planner.display_plan(plan)
+    
+    await brain.close()
+
+asyncio.run(custom_planning())
+```
+
+### Individual Scanner Usage
+
+```python
+from ai_pentest.scanners import WebScanner, NetworkScanner
+
 async def web_scan():
     scanner = WebScanner()
     result = await scanner.scan(
@@ -156,8 +354,13 @@ async def web_scan():
         print(f"[{vuln.severity}] {vuln.vuln_type}: {vuln.url}")
 
 asyncio.run(web_scan())
+```
 
-# AI Analysis
+### AI Analysis
+
+```python
+from ai_pentest.ai import CursorAIClient
+
 async def ai_analyze():
     async with CursorAIClient() as ai:
         response = await ai.analyze(
@@ -173,28 +376,47 @@ asyncio.run(ai_analyze())
 
 ```
 ai_pentest/
-├── __init__.py           # Package initialization
-├── cli.py                # Command-line interface
-├── config.py             # Configuration management
-├── orchestrator.py       # Main pentest orchestrator
+├── __init__.py              # Package initialization
+├── cli.py                   # Command-line interface
+├── config.py                # Configuration management
 ├── ai/
 │   ├── __init__.py
-│   ├── cursor_client.py  # AI API client (Cursor/Anthropic)
-│   └── prompts.py        # AI prompts for analysis
-├── scanners/
+│   ├── cursor_client.py     # AI API client (Cursor/Anthropic)
+│   └── prompts.py           # AI prompts for analysis
+├── engine/                  # 🧠 AI-Driven Pentest Engine
 │   ├── __init__.py
-│   ├── network.py        # Network reconnaissance
-│   ├── web.py            # Web vulnerability scanning
-│   ├── subdomain.py      # Subdomain enumeration
-│   ├── ssl_scanner.py    # SSL/TLS analysis
-│   └── ports.py          # Port scanning
+│   ├── core.py              # Main PentestEngine orchestrator
+│   ├── brain.py             # AI Brain - decision making core
+│   ├── phases.py            # Pentest phases (recon, enum, vuln, exploit)
+│   ├── planner.py           # Attack planning and path generation
+│   └── attack_surface.py    # Attack surface data model
+├── tools/                   # 50+ Security Tool Integrations
+│   ├── __init__.py
+│   ├── base.py              # Base ToolWrapper class
+│   ├── manager.py           # Tool orchestration
+│   ├── network/             # Nmap, Masscan, Subfinder, etc.
+│   ├── web/                 # Nikto, SQLMap, Nuclei, etc.
+│   ├── password/            # Hydra, John, Hashcat, etc.
+│   ├── binary/              # Binwalk, Radare2, etc.
+│   └── cloud/               # Prowler, Trivy, etc.
+├── scanners/                # Built-in scanners
+│   ├── __init__.py
+│   ├── network.py           # Network reconnaissance
+│   ├── web.py               # Web vulnerability scanning
+│   ├── subdomain.py         # Subdomain enumeration
+│   ├── ssl_scanner.py       # SSL/TLS analysis
+│   └── ports.py             # Port scanning
 ├── reports/
 │   ├── __init__.py
-│   ├── generator.py      # Report generation
-│   └── templates/        # HTML/PDF templates
+│   ├── generator.py         # Report generation
+│   └── templates/           # HTML/PDF templates
 └── utils/
     ├── __init__.py
-    └── helpers.py        # Utility functions
+    └── helpers.py           # Utility functions
+
+examples/
+├── basic_scan.py            # Basic scanning examples
+└── full_pentest.py          # Full AI-driven pentest examples
 ```
 
 ## 🔐 Security Considerations
